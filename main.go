@@ -5,19 +5,9 @@ import (
 	"log"
 	"net/http"
 	"os"
+
+	"cjdavis.me/elysium/models"
 )
-
-type Profile struct {
-	FirstName  string
-	LastName   string
-	Age        int
-	Occupation *Occupation
-}
-
-type Occupation struct {
-	CompanyName string
-	Position    string
-}
 
 func main() {
 	http.HandleFunc("/", handler)
@@ -44,10 +34,18 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
-func getCurrentOccupation() *Occupation {
-	return &Occupation{"CQL, Inc.", "Software Developer"}
+func getCurrentOccupation() *models.Occupation {
+	return &models.Occupation{
+		CompanyName: "CQL, Inc.",
+		Position:    "Software Developer",
+	}
 }
 
-func getProfile() *Profile {
-	return &Profile{"CJ", "Davis", 26, getCurrentOccupation()}
+func getProfile() *models.Profile {
+	return &models.Profile{
+		FirstName:  "CJ",
+		LastName:   "Davis",
+		Age:        26,
+		Occupation: getCurrentOccupation(),
+	}
 }
