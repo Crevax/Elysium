@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"os"
 
-	"cjdavis.me/elysium/models"
+	"cjdavis.me/elysium/services"
 )
 
 func main() {
@@ -22,7 +22,8 @@ func main() {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	p := getProfile()
+	profileService := services.NewProfileService()
+	p := profileService.GetProfile()
 
 	js, err := json.Marshal(p)
 	if err != nil {
@@ -32,20 +33,4 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(js)
-}
-
-func getCurrentOccupation() *models.Occupation {
-	return &models.Occupation{
-		CompanyName: "CQL, Inc.",
-		Position:    "Software Developer",
-	}
-}
-
-func getProfile() *models.Profile {
-	return &models.Profile{
-		FirstName:  "CJ",
-		LastName:   "Davis",
-		Age:        26,
-		Occupation: getCurrentOccupation(),
-	}
 }
