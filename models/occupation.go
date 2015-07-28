@@ -1,6 +1,6 @@
 package models
 
 type Occupation struct {
-	CompanyName string
-	Position    string
+	CompanyName string `bson:"CompanyName"`
+	Position    string `bson:"Position"`
 }

@@ -6,8 +6,24 @@ import (
 	"net/http"
 	"os"
 
+	"gopkg.in/mgo.v2"
+
 	"cjdavis.me/elysium/services"
 )
+
+var mongoHost = os.Getenv("MONGOLAB_URI")
+var mongoSession *mgo.Session
+var profileService services.IProfileService
+
+func init() {
+	mongoSession, err := mgo.Dial(mongoHost)
+	if err != nil {
+		log.Fatalf("Database connection error: %s\n", err.Error())
+		os.Exit(1)
+	}
+	mongoSession.SetMode(mgo.Monotonic, true)
+	profileService = services.NewProfileService(mongoSession)
+}
 
 func main() {
 	http.HandleFunc("/", handler)
@@ -22,7 +38,6 @@ func main() {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	profileService := services.NewProfileService()
 	p := profileService.GetProfile()
 
 	js, err := json.Marshal(p)
