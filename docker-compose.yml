@@ -1,0 +1,16 @@
+version: '2'
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    volumes:
+      - .:/go/src/cjdavis.me/elysium
+    working_dir: /go/src/cjdavis.me/elysium
+    command: go run main.go
+    ports:
+      - "8080:8080"
+      - "63892:63892"
+    environment:
+      PORT: 8080
+    env_file: ./.env

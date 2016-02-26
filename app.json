@@ -1,0 +1,8 @@
+{
+  "name": "Elysium",
+  "description": "API for powering CJ Davis's personal website",
+  "image": "heroku/golang:1.6",
+  "addons": [
+    "mongolab:sandbox"
+  ]
+}
