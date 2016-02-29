@@ -13,7 +13,7 @@ var Database = os.Getenv("MONGO_DB_NAME")
 func init() {
 	s, err := mgo.Dial(os.Getenv("MONGOLAB_URI"))
 	if err != nil {
-		log.Println("Error connecting to the database: " + err.Error())
+		log.Fatalf("Error connecting to the database: " + err.Error())
 	}
 	s.SetMode(mgo.Monotonic, true)
 	appdb = s
