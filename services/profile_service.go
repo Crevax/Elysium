@@ -1,10 +1,8 @@
 package services
 
 import (
-	"os"
-
+	"cjdavis.me/elysium/db"
 	"cjdavis.me/elysium/models"
-	"gopkg.in/mgo.v2"
 )
 
 type IProfileService interface {
@@ -12,15 +10,17 @@ type IProfileService interface {
 }
 
 type ProfileService struct {
-	database *mgo.Session
 }
 
-func NewProfileService(d *mgo.Session) *ProfileService {
-	return &ProfileService{d}
+func NewProfileService() *ProfileService {
+	return &ProfileService{}
 }
 
 func (s *ProfileService) GetProfile() *models.Profile {
-	profiles := s.database.DB(os.Getenv("MONGO_DB_NAME")).C("profiles")
+	tmpSession := db.AppDB().Copy()
+	defer tmpSession.Close()
+
+	profiles := tmpSession.DB(db.Database).C("profiles")
 	var profile models.Profile
 	profiles.Find(nil).One(&profile)
 	return &profile
