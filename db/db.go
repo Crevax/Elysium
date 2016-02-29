@@ -1,16 +1,17 @@
 package db
 
 import (
-  "gopkg.in/mgo.v2"
-  "os"
-  "log"
+	"log"
+	"os"
+
+	"gopkg.in/mgo.v2"
 )
 
 var appdb *mgo.Session
-var Database = os.Getenv("MONGOLAB_URI")
+var Database = os.Getenv("MONGO_DB_NAME")
 
 func init() {
-	s, err := mgo.Dial(os.Getenv("MONGO_DB_NAME"))
+	s, err := mgo.Dial(os.Getenv("MONGOLAB_URI"))
 	if err != nil {
 		log.Println("Error connecting to the database: " + err.Error())
 	}
