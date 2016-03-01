@@ -1,24 +1,23 @@
 package db
 
 import (
+	"database/sql"
 	"log"
 	"os"
 
-	"gopkg.in/mgo.v2"
+	_ "github.com/lib/pq"
 )
 
-var appdb *mgo.Session
-var Database = os.Getenv("MONGO_DB_NAME")
+var appdb *sql.DB
 
 func init() {
-	s, err := mgo.Dial(os.Getenv("MONGOLAB_URI"))
+	s, err := sql.Open("postgres", os.Getenv("DATABASE_URL"))
 	if err != nil {
 		log.Fatalf("Error connecting to the database: " + err.Error())
 	}
-	s.SetMode(mgo.Monotonic, true)
 	appdb = s
 }
 
-func AppDB() *mgo.Session {
+func AppDB() *sql.DB {
 	return appdb
 }
