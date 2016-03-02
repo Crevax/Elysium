@@ -6,15 +6,8 @@ import (
 	"net/http"
 	"os"
 
-	"cjdavis.me/elysium/interfaces/services"
 	"cjdavis.me/elysium/services"
 )
-
-var profileService interfaces.IProfileService
-
-func init() {
-	profileService = services.NewProfileService()
-}
 
 func main() {
 	http.HandleFunc("/", handler)
@@ -29,7 +22,7 @@ func main() {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	p := profileService.GetProfile()
+	p := services.GetProfileService().GetProfile()
 
 	js, err := json.Marshal(p)
 	if err != nil {
