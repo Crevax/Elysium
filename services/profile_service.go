@@ -1,12 +1,10 @@
 package services
 
 import (
-	"database/sql"
-	"encoding/json"
 	"log"
 
-	"cjdavis.me/elysium/db"
 	"cjdavis.me/elysium/models"
+	"cjdavis.me/elysium/repositories"
 )
 
 type IProfileService interface {
@@ -21,28 +19,10 @@ func NewProfileService() *ProfileService {
 }
 
 func (s *ProfileService) GetProfile() *models.Profile {
-	profile := models.Profile{}
-	jsonRow := json.RawMessage{}
-
-	err := db.AppDB().QueryRow(`
-SELECT data FROM profile
-ORDER BY data->>'id' ASC
-LIMIT 1
-`).Scan((*[]byte)(&jsonRow))
+	profile, err := repositories.GetProfileRepository().GetProfile()
 	if err != nil {
-		if err != sql.ErrNoRows {
-			log.Println("Error retrieving profile: " + err.Error())
-			return &profile
-		}
+		log.Println(err)
 	}
 
-	err = json.Unmarshal(jsonRow, &profile)
-	if err != nil {
-		if err != sql.ErrNoRows {
-			log.Println("Error unmarshalling json: " + err.Error())
-			return &profile
-		}
-	}
-
-	return &profile
+	return profile
 }
