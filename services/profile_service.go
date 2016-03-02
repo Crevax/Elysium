@@ -7,10 +7,6 @@ import (
 	"cjdavis.me/elysium/repositories"
 )
 
-type IProfileService interface {
-	GetProfile() *models.Profile
-}
-
 type ProfileService struct {
 }
 

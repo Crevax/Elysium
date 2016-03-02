@@ -6,10 +6,11 @@ import (
 	"net/http"
 	"os"
 
+	"cjdavis.me/elysium/interfaces/services"
 	"cjdavis.me/elysium/services"
 )
 
-var profileService services.IProfileService
+var profileService interfaces.IProfileService
 
 func init() {
 	profileService = services.NewProfileService()
