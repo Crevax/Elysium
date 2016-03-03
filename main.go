@@ -6,11 +6,14 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/julienschmidt/httprouter"
+
 	"cjdavis.me/elysium/services"
 )
 
 func main() {
-	http.HandleFunc("/", handler)
+	router := httprouter.New()
+	router.GET("/", handler)
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -18,10 +21,10 @@ func main() {
 	}
 
 	log.Printf("Elysium listening on port %s", port)
-	http.ListenAndServe(":"+port, nil)
+	http.ListenAndServe(":"+port, router)
 }
 
-func handler(w http.ResponseWriter, r *http.Request) {
+func handler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	p := services.GetProfileService().GetProfile()
 
 	js, err := json.Marshal(p)
