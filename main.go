@@ -1,19 +1,19 @@
 package main
 
 import (
-	"encoding/json"
 	"log"
 	"net/http"
 	"os"
 
-	"github.com/julienschmidt/httprouter"
+	"cjdavis.me/elysium/controllers"
 
-	"cjdavis.me/elysium/services"
+	"github.com/julienschmidt/httprouter"
 )
 
 func main() {
 	router := httprouter.New()
-	router.GET("/", handler)
+
+	controllers.Init(router)
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -22,17 +22,4 @@ func main() {
 
 	log.Printf("Elysium listening on port %s", port)
 	http.ListenAndServe(":"+port, router)
-}
-
-func handler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	p := services.GetProfileService().GetProfile()
-
-	js, err := json.Marshal(p)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(js)
 }
