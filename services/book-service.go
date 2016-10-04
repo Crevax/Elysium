@@ -3,7 +3,7 @@ package services
 import (
 	"log"
 
-	"cjdavis.me/elysium/models"
+	"cjdavis.me/elysium/library"
 	"cjdavis.me/elysium/repositories"
 )
 
@@ -14,7 +14,7 @@ func NewBookService() *BookService {
 	return &BookService{}
 }
 
-func (self *BookService) GetAllBooks() []models.Book {
+func (self *BookService) GetAllBooks() []library.Book {
 	books, err := repositories.GetBookRepository().GetAllBooks()
 	if err != nil {
 		log.Println(err)
@@ -23,7 +23,7 @@ func (self *BookService) GetAllBooks() []models.Book {
 	return books
 }
 
-func (self *BookService) GetBooksByAuthor(authorID int) []models.Book {
+func (self *BookService) GetBooksByAuthor(authorID int) []library.Book {
 	books, err := repositories.GetBookRepository().GetBooksByAuthor(authorID)
 	if err != nil {
 		log.Println(err)

@@ -1,4 +1,4 @@
-package models
+package library
 
 type Author struct {
 	ID         int

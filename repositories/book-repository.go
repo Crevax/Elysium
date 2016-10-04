@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"cjdavis.me/elysium/db"
-	"cjdavis.me/elysium/models"
+	"cjdavis.me/elysium/library"
 )
 
 type BookRepository struct {
@@ -14,8 +14,8 @@ func NewBookRepository() *BookRepository {
 	return &BookRepository{}
 }
 
-func (self *BookRepository) GetAllBooks() ([]models.Book, error) {
-	books := []models.Book{}
+func (self *BookRepository) GetAllBooks() ([]library.Book, error) {
+	books := []library.Book{}
 
 	rows, err := db.AppDB().Query(`
 SELECT b.id, b.title, b.read, a.id, a.first_name, a.last_name
@@ -28,8 +28,8 @@ LEFT JOIN author a on a.id = b.authorid
 	defer rows.Close()
 
 	for rows.Next() {
-		book := models.Book{}
-		author := models.Author{}
+		book := library.Book{}
+		author := library.Author{}
 		err := rows.Scan(&book.ID, &book.Title, &book.Read, &author.ID, &author.FirstName, &author.LastName)
 		if err != nil {
 			log.Println("Error scanning books: ", err)
@@ -48,8 +48,8 @@ LEFT JOIN author a on a.id = b.authorid
 	return books, err
 }
 
-func (self *BookRepository) GetBooksByAuthor(authorID int) ([]models.Book, error) {
-	books := []models.Book{}
+func (self *BookRepository) GetBooksByAuthor(authorID int) ([]library.Book, error) {
+	books := []library.Book{}
 
 	rows, err := db.AppDB().Query(`
 SELECT b.id, b.title, b.read, a.id, a.first_name, a.last_name
@@ -63,8 +63,8 @@ WHERE b.authorid = $1
 	defer rows.Close()
 
 	for rows.Next() {
-		book := models.Book{}
-		author := models.Author{}
+		book := library.Book{}
+		author := library.Author{}
 		err := rows.Scan(&book.ID, &book.Title, &book.Read, &author.ID, &author.FirstName, &author.LastName)
 		if err != nil {
 			log.Println("Error scanning books: ", err)

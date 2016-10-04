@@ -3,7 +3,7 @@ package services
 import (
 	"log"
 
-	"cjdavis.me/elysium/models"
+	"cjdavis.me/elysium/library"
 	"cjdavis.me/elysium/repositories"
 )
 
@@ -14,7 +14,7 @@ func NewAuthorService() *AuthorService {
 	return &AuthorService{}
 }
 
-func (self *AuthorService) GetAllAuthors() []models.Author {
+func (self *AuthorService) GetAllAuthors() []library.Author {
 	authors, err := repositories.GetAuthorRepository().GetAllAuthors()
 	if err != nil {
 		log.Println(err)

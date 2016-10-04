@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"cjdavis.me/elysium/db"
-	"cjdavis.me/elysium/models"
+	"cjdavis.me/elysium/library"
 )
 
 type AuthorRepository struct {
@@ -14,8 +14,8 @@ func NewAuthorRepository() *AuthorRepository {
 	return &AuthorRepository{}
 }
 
-func (self *AuthorRepository) GetAllAuthors() ([]models.Author, error) {
-	authors := []models.Author{}
+func (self *AuthorRepository) GetAllAuthors() ([]library.Author, error) {
+	authors := []library.Author{}
 
 	rows, err := db.AppDB().Query(`
 SELECT id, first_name, last_name
@@ -27,7 +27,7 @@ FROM author
 	defer rows.Close()
 
 	for rows.Next() {
-		author := models.Author{}
+		author := library.Author{}
 		err := rows.Scan(&author.ID, &author.FirstName, &author.LastName)
 		if err != nil {
 			log.Println("Error scanning authors: ", err)
