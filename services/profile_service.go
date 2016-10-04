@@ -3,7 +3,7 @@ package services
 import (
 	"log"
 
-	"cjdavis.me/elysium/models"
+	"cjdavis.me/elysium/profile"
 	"cjdavis.me/elysium/repositories"
 )
 
@@ -14,7 +14,7 @@ func NewProfileService() *ProfileService {
 	return &ProfileService{}
 }
 
-func (s *ProfileService) GetProfile() *models.Profile {
+func (s *ProfileService) GetProfile() *profile.Profile {
 	profile, err := repositories.GetProfileRepository().GetProfile()
 	if err != nil {
 		log.Println(err)

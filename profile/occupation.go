@@ -1,4 +1,4 @@
-package models
+package profile
 
 type Occupation struct {
 	CompanyName string `json:"CompanyName"`

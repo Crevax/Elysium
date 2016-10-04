@@ -7,7 +7,7 @@ import (
 	"fmt"
 
 	"cjdavis.me/elysium/db"
-	"cjdavis.me/elysium/models"
+	"cjdavis.me/elysium/profile"
 )
 
 type ProfileRepository struct {
@@ -17,8 +17,8 @@ func NewProfileRepository() *ProfileRepository {
 	return &ProfileRepository{}
 }
 
-func (s *ProfileRepository) GetProfile() (*models.Profile, error) {
-	profile := models.Profile{}
+func (s *ProfileRepository) GetProfile() (*profile.Profile, error) {
+	profile := profile.Profile{}
 	jsonRow := json.RawMessage{}
 
 	err := db.AppDB().QueryRow(`

@@ -1,11 +1,11 @@
 package services
 
 import (
-	"cjdavis.me/elysium/interfaces/services"
 	"cjdavis.me/elysium/library"
+	"cjdavis.me/elysium/profile"
 )
 
-var profileService interfaces.IProfileService
+var profileService profile.IProfileService
 var bookService library.IBookService
 var authorService library.IAuthorService
 
@@ -15,7 +15,7 @@ func init() {
 	authorService = NewAuthorService()
 }
 
-func GetProfileService() interfaces.IProfileService {
+func GetProfileService() profile.IProfileService {
 	return profileService
 }
 

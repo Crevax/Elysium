@@ -1,9 +1,11 @@
 package repositories
 
-import "cjdavis.me/elysium/interfaces/repositories"
-import "cjdavis.me/elysium/library"
+import (
+	"cjdavis.me/elysium/library"
+	"cjdavis.me/elysium/profile"
+)
 
-var profileRepository interfaces.IProfileRepository
+var profileRepository profile.IProfileRepository
 var bookRepository library.IBookRepository
 var authorRepository library.IAuthorRepository
 
@@ -13,7 +15,7 @@ func init() {
 	authorRepository = NewAuthorRepository()
 }
 
-func GetProfileRepository() interfaces.IProfileRepository {
+func GetProfileRepository() profile.IProfileRepository {
 	return profileRepository
 }
 

@@ -1,4 +1,4 @@
-package models
+package profile
 
 type Profile struct {
 	ID         int         `json:"id"`
