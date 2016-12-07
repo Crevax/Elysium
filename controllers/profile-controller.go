@@ -1,28 +1,20 @@
 package controllers
 
 import (
-	"encoding/json"
 	"net/http"
 
 	"cjdavis.me/elysium/services"
-	"github.com/julienschmidt/httprouter"
+	"github.com/labstack/echo"
 )
 
 type ProfileController struct{}
 
-func (ctrl *ProfileController) Init(router *httprouter.Router) {
+func (ctrl *ProfileController) Init(router *echo.Echo) {
 	router.GET("/", Index)
 }
 
-func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+func Index(c echo.Context) error {
 	p := services.GetProfileService().GetProfile()
 
-	js, err := json.Marshal(p)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(js)
+	return c.JSON(http.StatusOK, p)
 }

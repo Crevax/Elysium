@@ -2,16 +2,17 @@ package main
 
 import (
 	"log"
-	"net/http"
 	"os"
 
-	"cjdavis.me/elysium/controllers"
+	"github.com/labstack/echo"
 
-	"github.com/julienschmidt/httprouter"
+	"fmt"
+
+	"cjdavis.me/elysium/controllers"
 )
 
 func main() {
-	router := httprouter.New()
+	router := echo.New()
 
 	controllers.Init(router)
 
@@ -21,5 +22,5 @@ func main() {
 	}
 
 	log.Printf("Elysium listening on port %s", port)
-	http.ListenAndServe(":"+port, router)
+	router.Logger.Fatal(router.Start(fmt.Sprintf(":%s", port)))
 }

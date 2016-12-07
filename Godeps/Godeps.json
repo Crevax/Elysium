@@ -4,9 +4,19 @@
 	"GodepVersion": "v75",
 	"Deps": [
 		{
-			"ImportPath": "github.com/julienschmidt/httprouter",
-			"Comment": "v1.1-40-g5dd70ee",
-			"Rev": "5dd70ee059943e81987a817fa1a755b11dd119c1"
+			"ImportPath": "github.com/labstack/echo",
+			"Comment": "v3.0.3",
+			"Rev": "8d504c1b699c757b267255c53b3e5219f9974abc"
+		},
+		{
+			"ImportPath": "github.com/labstack/gommon/color",
+			"Comment": "v0.1.0-2-g447fe74",
+			"Rev": "447fe7433567c785af957e549aadae2bf2000071"
+		},
+		{
+			"ImportPath": "github.com/labstack/gommon/log",
+			"Comment": "v0.1.0-2-g447fe74",
+			"Rev": "447fe7433567c785af957e549aadae2bf2000071"
 		},
 		{
 			"ImportPath": "github.com/lib/pq",
@@ -17,6 +27,44 @@
 			"ImportPath": "github.com/lib/pq/oid",
 			"Comment": "go1.0-cutoff-81-g69552e5",
 			"Rev": "69552e54d2a9d4c6a2438926a774930f7bc398ec"
+		},
+		{
+			"ImportPath": "github.com/mattn/go-colorable",
+			"Comment": "v0.0.6-9-gd228849",
+			"Rev": "d228849504861217f796da67fae4f6e347643f15"
+		},
+		{
+			"ImportPath": "github.com/mattn/go-isatty",
+			"Rev": "30a891c33c7cde7b02a981314b4228ec99380cca"
+		},
+		{
+			"ImportPath": "github.com/tylerb/graceful",
+			"Comment": "v1.2.13-2-g4df1190",
+			"Rev": "4df1190835320af7076dfcf27b3d071fd3612caf"
+		},
+		{
+			"ImportPath": "github.com/valyala/fasttemplate",
+			"Rev": "3b874956e03f1636d171bda64b130f9135f42cff"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/acme",
+			"Rev": "8a549a1948fc5271eb24f36dcb0d3b47dec75a16"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/acme/autocert",
+			"Rev": "8a549a1948fc5271eb24f36dcb0d3b47dec75a16"
+		},
+		{
+			"ImportPath": "golang.org/x/net/context",
+			"Rev": "6cdc0daab091c43fc46193327e0047b4f883c613"
+		},
+		{
+			"ImportPath": "golang.org/x/net/context/ctxhttp",
+			"Rev": "6cdc0daab091c43fc46193327e0047b4f883c613"
+		},
+		{
+			"ImportPath": "golang.org/x/sys/unix",
+			"Rev": "a646d33e2ee3172a661fc09bca23bb4889a41bc8"
 		}
 	]
 }
