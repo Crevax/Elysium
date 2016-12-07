@@ -1,6 +1,6 @@
 {
 	"ImportPath": "cjdavis.me/elysium",
-	"GoVersion": "go1.6",
+	"GoVersion": "go1.7",
 	"Deps": [
 		{
 			"ImportPath": "github.com/julienschmidt/httprouter",
